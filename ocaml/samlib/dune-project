@@ -1,0 +1,23 @@
+(lang dune 3.0)
+(name samlib)
+(version 0.1.0)
+
+(generate_opam_files true)
+
+(source (github yourusername/samlib))
+(license MIT)
+(authors "SAMLib Contributors")
+(maintainers "SAMLib Maintainers")
+
+(package
+ (name samlib)
+ (synopsis "Simple Agent/Actor Model Library for OCaml")
+ (description "A lightweight actor model implementation in OCaml with channel-based communication")
+ (depends
+  (ocaml (>= 4.14.1))
+  (dune (>= 3.0))
+  (core (>= v0.15.0))
+  (async (>= v0.15.0))
+  (ppx_jane (>= v0.15.0))
+  (ppx_deriving (>= 5.2.1))
+  (ounit2 :with-test)))

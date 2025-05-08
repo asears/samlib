@@ -1,0 +1,56 @@
+name: OCaml CI
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'ocaml/**'
+      - '.github/workflows/ocaml.yml'
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'ocaml/**'
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        os:
+          - ubuntu-latest
+          - windows-latest
+        ocaml-compiler:
+          - 4.14.1
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Use OCaml ${{ matrix.ocaml-compiler }}
+        uses: ocaml/setup-ocaml@v2
+        with:
+          ocaml-compiler: ${{ matrix.ocaml-compiler }}
+          dune-cache: true
+
+      - name: Install dependencies
+        working-directory: ./ocaml/samlib
+        run: opam install . --deps-only --with-test
+
+      - name: Check formatting
+        working-directory: ./ocaml/samlib
+        run: opam exec -- dune build @fmt
+        if: runner.os != 'Windows'
+
+      - name: Build
+        working-directory: ./ocaml/samlib
+        run: opam exec -- dune build
+
+      - name: Run tests
+        working-directory: ./ocaml/samlib
+        run: opam exec -- dune runtest
+
+      - name: Build documentation
+        working-directory: ./ocaml/samlib
+        run: opam exec -- dune build @doc

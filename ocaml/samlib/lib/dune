@@ -1,0 +1,5 @@
+(library
+ (name samlib)
+ (public_name samlib)
+ (libraries core async ppx_jane)
+ (preprocess (pps ppx_jane ppx_deriving.show ppx_deriving.eq)))

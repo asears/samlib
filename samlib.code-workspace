@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"ocaml.sandbox": {
+			"kind": "custom",
+			"template": "$prog $args"
+		}
+	}
+}

@@ -1,0 +1,5 @@
+(library
+ (name samlib_test)
+ (libraries samlib core async oUnit)
+ (preprocess (pps ppx_jane))
+ (inline_tests))

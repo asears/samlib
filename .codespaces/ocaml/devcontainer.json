@@ -1,0 +1,23 @@
+{
+    "name": "OCaml SAMLib",
+    "build": {
+        "dockerfile": "Dockerfile"
+    },
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ocamllabs.ocaml-platform",
+                "eamodio.gitlens",
+                "github.copilot"
+            ],
+            "settings": {
+                "ocaml.sandbox": {
+                    "kind": "opam",
+                    "switch": "4.14.1"
+                }
+            }
+        }
+    },
+    "remoteUser": "vscode",
+    "postCreateCommand": "opam install . --deps-only --with-test"
+}

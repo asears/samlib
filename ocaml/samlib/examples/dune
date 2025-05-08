@@ -1,0 +1,4 @@
+(library
+ (name samlib_examples)
+ (libraries samlib core async ppx_jane)
+ (preprocess (pps ppx_jane)))
